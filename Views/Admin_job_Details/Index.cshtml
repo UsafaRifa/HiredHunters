@@ -1,0 +1,114 @@
+﻿@model IEnumerable<HiredHunters.Models.Job>
+
+@{
+    ViewBag.Title = "All Jobs";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+<h2>All Jobs</h2>
+<p style="font-size: 50px; text-align: center;">All Jobs</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Job_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AskingPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recruiter.Recruiter_ID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            string availablity;
+
+            if (item.isAvailable == 0)
+            {
+
+                availablity = "Not Approved";
+
+            }
+            else
+            {
+                availablity = "Available";
+
+            }
+
+
+            <tr class="table-primary">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Locations)
+                </td>
+                <td>
+                    @availablity
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AskingPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recruiter.Recruiter_ID)
+                </td>
+                <td>
+                    @{ if (item.isAvailable == 0)
+                        { @Html.ActionLink("Approve", "Approve", new { id = item.J_no }, new { @class = "btn btn - primary" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.J_no }, new { @class = "btn btn - primary" })
+                        @Html.ActionLink("Details", "Details", new { id = item.J_no }, new { @class = "btn btn - primary" })
+                        @Html.ActionLink("Delete", "Dlt", new { id = item.J_no }, new { @class = "btn btn - primary" })
+
+                    }
+
+                    else
+                    {@Html.ActionLink("DisApprove", "DisApprove", new { id = item.J_no }, new { @class = "btn btn - primary" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.J_no }, new { @class = "btn btn - primary" })
+                    @Html.ActionLink("Details", "Details", new { id = item.J_no }, new { @class = "btn btn - primary" })
+                    @Html.ActionLink("Delete", "Dlt", new { id = item.J_no }, new { @class = "btn btn - primary" })
+
+
+
+                }
+                    }
+                </td>
+            </tr>
+        }
+
+       
+</table>

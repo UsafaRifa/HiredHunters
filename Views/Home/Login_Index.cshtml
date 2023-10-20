@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Login_Index";
+    Layout = "~/Views/Shared/_LayoutAll.cshtml";
+
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" integrity="sha256-3sPp8BkKUE7QyPSl6VfBByBroQbKxKG7tsusY2mhbVY=" crossorigin="anonymous" />
+<link rel="stylesheet" href="..\assets\css\LogIN.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-11 mt-60 mx-md-auto">
+            <div class="login-box bg-white pl-lg-5 pl-0">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-md-6">
+                        <div class="form-wrap bg-white">
+                            <h4 class="btm-sep pb-3 mb-5">Login</h4>
+
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                @ViewBag.errmesg;
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form class="form" method="post" action="~/Home/Login_Index">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group position-relative">
+                                            <span class="zmdi zmdi-account"></span>
+                                            <input type="email" id="email" class="form-control" placeholder="Email Address" name="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group position-relative">
+                                            <span class="zmdi zmdi-email"></span>
+                                            <input type="password" id="password" class="form-control" placeholder="Password" name="pass">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Freelencer" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            &emsp;&emsp;Freelancer
+                                        </label>
+                                    </div>
+                                    <div class="col-6 form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" value="Recruiter" id="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            &emsp;&emsp;Recruiter
+                                        </label>
+                                    </div>
+
+                                    <div class="col-12 text-center">
+                                       
+                                    </div>
+                                    <div class="col-12 mt-30">
+                                        <button type="submit" id="submit" class="btn btn-lg btn-custom btn-dark btn-block">
+                                            Sign In
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="content text-center">
+                            <div class="border-bottom pb-5 mb-5">
+                                <h3 class="c-black">First time here?</h3>
+                                <a href="signUP_Index" class="btn btn-custom">Sign up</a>
+                            </div>
+                            <h5 class="c-black mb-4 mt-n1">Or Sign In With</h5>
+                            <div class="socials">
+                                <a href="#" class="zmdi zmdi-facebook"></a>
+                                <a href="#" class="zmdi zmdi-twitter"></a>
+                                <a href="#" class="zmdi zmdi-google"></a>
+                                <a href="#" class="zmdi zmdi-instagram"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

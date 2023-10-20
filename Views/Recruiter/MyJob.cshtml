@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HiredHunters.Models.Job>
+@{
+    ViewBag.Title = "MyJob";
+    Layout = "~/Views/Recruiter/_LayoutRecruiter.cshtml";
+}
+<!-- CSS here -->
+<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="~/assets/css/flaticon.css">
+<link rel="stylesheet" href="../assets/css/price_rangs.css">
+<link rel="stylesheet" href="../assets/css/slicknav.css">
+<link rel="stylesheet" href="../assets/css/animate.min.css">
+<link rel="stylesheet" href="../assets/css/magnific-popup.css">
+<link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../assets/css/themify-icons.css">
+<link rel="stylesheet" href="../assets/css/slick.css">
+<link rel="stylesheet" href="../assets/css/nice-select.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+<div class="container d-flex justify-content-center col-lg-8 col-md-12">
+    <h2>MyJob</h2>
+    @foreach (var item in Model)
+    {
+
+
+        if (item.Recruiter_ID == (int?)Session["r_no"])
+        {
+
+            <div class="single-job-items mb-30">
+
+                <div class="job-items">
+
+                    <div class="job-tittle job-tittle2">
+                        <a href="#">
+                            <h4> Job Title: @Html.ActionLink(item.Title, "JobDetails", new { id = item.J_no })</h4>
+                        </a>
+                        <ul>
+
+                            <li><i class="fas fa-map-marker-alt"></i>Location:@Html.DisplayFor(modelItem => item.Locations)</li>
+                            <li>Asking Price: $@Html.DisplayFor(modelItem => item.AskingPrice)</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <span></span>
+
+            </div>
+
+        }
+
+
+
+    }
+
+
+</div>
+

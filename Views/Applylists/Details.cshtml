@@ -1,0 +1,43 @@
+﻿@model HiredHunters.Models.Applylist
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAll.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Applylist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.isgiven)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isgiven)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Freelencer.Freelencer_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Freelencer.Freelencer_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Job.Job_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job.Job_ID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.apply_no }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

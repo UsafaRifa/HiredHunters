@@ -1,0 +1,49 @@
+﻿@model IEnumerable<HiredHunters.Models.ContactU>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Full_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phonenumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Con_Message)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="table-primary">
+        <td>
+            @Html.DisplayFor(modelItem => item.Full_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phonenumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Con_Message)
+        </td>
+        <td>
+           
+           @Html.ActionLink("Delete", "Del", new { id=item.apply_no }, new { @class = "btn btn - primary" })
+            </td>
+
+    </tr>
+}
+
+</table>

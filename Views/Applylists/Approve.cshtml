@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HiredHunters.Models.Job>
+
+@{
+    ViewBag.Title = "Approve";
+}
+
+<h2>Approve</h2>
+
+
+<table class="table">
+    <tr>
+        <th> MAC Address </th>
+        <th> Status </th>
+        <th> Actions </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Hidden("id", item.Job_ID)
+            <tr>
+                <td> @item.AskingPrice </td>
+                <td> @item.isAvailable </td>
+                <td>
+                    <button type="submit" name="SubmitButton" value="Approve" class="btn btn-sm btn-success">Approve</button>
+                    <button type="submit" name="SubmitButton" value="Unapprove" class="btn btn-sm btn-danger">Unapprove</button>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+

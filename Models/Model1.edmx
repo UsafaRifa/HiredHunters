@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HiredHuntersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applylist">
+          <Key>
+            <PropertyRef Name="apply_no" />
+          </Key>
+          <Property Name="apply_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Freelencer_ID" Type="int" />
+          <Property Name="Job_ID" Type="int" />
+          <Property Name="isgiven" Type="int" />
+        </EntityType>
+        <EntityType Name="ContactUs">
+          <Key>
+            <PropertyRef Name="apply_no" />
+          </Key>
+          <Property Name="apply_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Full_name" Type="varchar" MaxLength="255" />
+          <Property Name="Email_Address" Type="varchar" MaxLength="255" />
+          <Property Name="Phonenumber" Type="varchar" MaxLength="255" />
+          <Property Name="Con_Message" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Freelencer">
+          <Key>
+            <PropertyRef Name="f_no" />
+          </Key>
+          <Property Name="f_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Freelencer_ID" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="14" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="DateofBirth" Type="date" />
+          <Property Name="F_Address" Type="varchar" MaxLength="255" />
+          <Property Name="DateofJoining" Type="date" />
+          <Property Name="JobCompleted" Type="int" />
+          <Property Name="NetIncome" Type="real" />
+          <Property Name="rating" Type="real" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isEmailVarified" Type="int" />
+          <Property Name="pass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="J_no" />
+          </Key>
+          <Property Name="J_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Job_ID" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Details" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="Locations" Type="varchar" MaxLength="255" />
+          <Property Name="isAvailable" Type="int" />
+          <Property Name="Recruiter_ID" Type="int" />
+          <Property Name="AskingPrice" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Manange">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Recruiter">
+          <Key>
+            <PropertyRef Name="r_no" />
+          </Key>
+          <Property Name="r_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Recruiter_ID" Type="varchar" MaxLength="8" StoreGeneratedPattern="Computed" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Profilepic" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="14" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="JoiningDate" Type="date" />
+          <Property Name="R_address" Type="varchar" MaxLength="255" />
+          <Property Name="Rating" Type="real" />
+          <Property Name="Total_job_Posted" Type="int" />
+          <Property Name="pass" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Applylist__Freel__286302EC">
+          <End Role="Freelencer" Type="Self.Freelencer" Multiplicity="0..1" />
+          <End Role="Applylist" Type="Self.Applylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Freelencer">
+              <PropertyRef Name="f_no" />
+            </Principal>
+            <Dependent Role="Applylist">
+              <PropertyRef Name="Freelencer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applylist__Job_I__29572725">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="Applylist" Type="Self.Applylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="J_no" />
+            </Principal>
+            <Dependent Role="Applylist">
+              <PropertyRef Name="Job_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Job__Recruiter_I__1FCDBCEB">
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiter">
+              <PropertyRef Name="r_no" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="Recruiter_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HiredHuntersModelStoreContainer">
+          <EntitySet Name="Applylist" EntityType="Self.Applylist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Freelencer" EntityType="Self.Freelencer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manange" EntityType="Self.Manange" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recruiter" EntityType="Self.Recruiter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Applylist__Freel__286302EC" Association="Self.FK__Applylist__Freel__286302EC">
+            <End Role="Freelencer" EntitySet="Freelencer" />
+            <End Role="Applylist" EntitySet="Applylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applylist__Job_I__29572725" Association="Self.FK__Applylist__Job_I__29572725">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Applylist" EntitySet="Applylist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Job__Recruiter_I__1FCDBCEB" Association="Self.FK__Job__Recruiter_I__1FCDBCEB">
+            <End Role="Recruiter" EntitySet="Recruiter" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HiredHuntersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Applylist">
+          <Key>
+            <PropertyRef Name="apply_no" />
+          </Key>
+          <Property Name="apply_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Freelencer_ID" Type="Int32" />
+          <Property Name="Job_ID" Type="Int32" />
+          <Property Name="isgiven" Type="Int32" />
+          <NavigationProperty Name="Freelencer" Relationship="Self.FK__Applylist__Freel__286302EC" FromRole="Applylist" ToRole="Freelencer" />
+          <NavigationProperty Name="Job" Relationship="Self.FK__Applylist__Job_I__29572725" FromRole="Applylist" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="ContactU">
+          <Key>
+            <PropertyRef Name="apply_no" />
+          </Key>
+          <Property Name="apply_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Con_Message" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Freelencer">
+          <Key>
+            <PropertyRef Name="f_no" />
+          </Key>
+          <Property Name="f_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Freelencer_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+          <Property Name="F_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateofJoining" Type="DateTime" Precision="0" />
+          <Property Name="JobCompleted" Type="Int32" />
+          <Property Name="NetIncome" Type="Single" />
+          <Property Name="rating" Type="Single" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isEmailVarified" Type="Int32" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applylists" Relationship="Self.FK__Applylist__Freel__286302EC" FromRole="Freelencer" ToRole="Applylist" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="J_no" />
+          </Key>
+          <Property Name="J_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Details" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="Locations" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isAvailable" Type="Int32" />
+          <Property Name="Recruiter_ID" Type="Int32" />
+          <Property Name="AskingPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applylists" Relationship="Self.FK__Applylist__Job_I__29572725" FromRole="Job" ToRole="Applylist" />
+          <NavigationProperty Name="Recruiter" Relationship="Self.FK__Job__Recruiter_I__1FCDBCEB" FromRole="Job" ToRole="Recruiter" />
+        </EntityType>
+        <EntityType Name="Manange">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Recruiter">
+          <Key>
+            <PropertyRef Name="r_no" />
+          </Key>
+          <Property Name="r_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Recruiter_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Profilepic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+          <Property Name="R_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Single" />
+          <Property Name="Total_job_Posted" Type="Int32" />
+          <Property Name="pass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK__Job__Recruiter_I__1FCDBCEB" FromRole="Recruiter" ToRole="Job" />
+        </EntityType>
+        <Association Name="FK__Applylist__Freel__286302EC">
+          <End Role="Freelencer" Type="Self.Freelencer" Multiplicity="0..1" />
+          <End Role="Applylist" Type="Self.Applylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Freelencer">
+              <PropertyRef Name="f_no" />
+            </Principal>
+            <Dependent Role="Applylist">
+              <PropertyRef Name="Freelencer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applylist__Job_I__29572725">
+          <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+          <End Role="Applylist" Type="Self.Applylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="J_no" />
+            </Principal>
+            <Dependent Role="Applylist">
+              <PropertyRef Name="Job_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Job__Recruiter_I__1FCDBCEB">
+          <End Role="Recruiter" Type="Self.Recruiter" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiter">
+              <PropertyRef Name="r_no" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="Recruiter_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HiredHuntersEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applylists" EntityType="Self.Applylist" />
+          <EntitySet Name="ContactUs" EntityType="Self.ContactU" />
+          <EntitySet Name="Freelencers" EntityType="Self.Freelencer" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="Mananges" EntityType="Self.Manange" />
+          <EntitySet Name="Recruiters" EntityType="Self.Recruiter" />
+          <AssociationSet Name="FK__Applylist__Freel__286302EC" Association="Self.FK__Applylist__Freel__286302EC">
+            <End Role="Freelencer" EntitySet="Freelencers" />
+            <End Role="Applylist" EntitySet="Applylists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applylist__Job_I__29572725" Association="Self.FK__Applylist__Job_I__29572725">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Applylist" EntitySet="Applylists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Job__Recruiter_I__1FCDBCEB" Association="Self.FK__Job__Recruiter_I__1FCDBCEB">
+            <End Role="Recruiter" EntitySet="Recruiters" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HiredHuntersModelStoreContainer" CdmEntityContainer="HiredHuntersEntities2">
+          <EntitySetMapping Name="Applylists">
+            <EntityTypeMapping TypeName="HiredHuntersModel.Applylist">
+              <MappingFragment StoreEntitySet="Applylist">
+                <ScalarProperty Name="apply_no" ColumnName="apply_no" />
+                <ScalarProperty Name="Freelencer_ID" ColumnName="Freelencer_ID" />
+                <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
+                <ScalarProperty Name="isgiven" ColumnName="isgiven" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactUs">
+            <EntityTypeMapping TypeName="HiredHuntersModel.ContactU">
+              <MappingFragment StoreEntitySet="ContactUs">
+                <ScalarProperty Name="apply_no" ColumnName="apply_no" />
+                <ScalarProperty Name="Full_name" ColumnName="Full_name" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Con_Message" ColumnName="Con_Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freelencers">
+            <EntityTypeMapping TypeName="HiredHuntersModel.Freelencer">
+              <MappingFragment StoreEntitySet="Freelencer">
+                <ScalarProperty Name="f_no" ColumnName="f_no" />
+                <ScalarProperty Name="Freelencer_ID" ColumnName="Freelencer_ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="F_Address" ColumnName="F_Address" />
+                <ScalarProperty Name="DateofJoining" ColumnName="DateofJoining" />
+                <ScalarProperty Name="JobCompleted" ColumnName="JobCompleted" />
+                <ScalarProperty Name="NetIncome" ColumnName="NetIncome" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="isEmailVarified" ColumnName="isEmailVarified" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="HiredHuntersModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="J_no" ColumnName="J_no" />
+                <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Locations" ColumnName="Locations" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+                <ScalarProperty Name="Recruiter_ID" ColumnName="Recruiter_ID" />
+                <ScalarProperty Name="AskingPrice" ColumnName="AskingPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mananges">
+            <EntityTypeMapping TypeName="HiredHuntersModel.Manange">
+              <MappingFragment StoreEntitySet="Manange">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recruiters">
+            <EntityTypeMapping TypeName="HiredHuntersModel.Recruiter">
+              <MappingFragment StoreEntitySet="Recruiter">
+                <ScalarProperty Name="r_no" ColumnName="r_no" />
+                <ScalarProperty Name="Recruiter_ID" ColumnName="Recruiter_ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Profilepic" ColumnName="Profilepic" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="R_address" ColumnName="R_address" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Total_job_Posted" ColumnName="Total_job_Posted" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
